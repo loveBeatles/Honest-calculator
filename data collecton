@@ -1,0 +1,17 @@
+def inputting():
+    operators = ['+', '-', '*', '/']
+    msg_0 = "Enter an equation"
+    msg_1 = "Do you even know what numbers are? Stay focused!"
+    msg_2 = "Yes ... an interesting math operation. You've slept through all classes, haven't you?"
+    while True:
+        print(msg_0)
+        equation = input().split()
+        number_1, operator, number_2 = equation
+        if number_1.isalpha() or number_2.isalpha():
+            print(msg_1)
+        elif operator not in operators:
+            print(msg_2)
+        else:
+            break
+
+inputting()
