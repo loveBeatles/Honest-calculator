@@ -1,0 +1,57 @@
+def calculator(expression):
+    num1, operator, num2 = expression
+    num1, num2 = float(num1), float(num2)
+
+    if operator == '*':
+        return num1 * num2
+    elif operator == '/':
+        return num1 / num2
+    elif operator == '+':
+        return num1 + num2
+    else:
+        return num1 - num2
+
+def data_collect():
+    msg = ("Enter an equation", "Do you even know what numbers are? Stay focused!",
+           "Yes ... an interesting math operation. You've slept through all classes, haven't you?",
+           "Yeah... division by zero. Smart move...")
+    while True:
+        print(msg[0])
+        equation = input().split()
+        number_1, operator, number_2 = equation
+        if number_1 == 'M':
+            number_1 = M
+        elif number_2 == 'M':
+            number_2 = M
+
+        if number_1.isalpha() or number_2.isalpha():
+            print(msg[1])
+        elif operator not in ('+', '-', '*', '/'):
+            print(msg[2])
+        elif operator == '/' and number_2 == '0':
+            print(msg[3])
+        else:
+            return (number_1, operator, number_2)
+            break
+
+def recall():
+    global M
+    M = '0'
+    msg = ("Do you want to store the result? (y / n):\n", "Do you want to continue calculations? (y / n):\n")
+    result = calculator(data_collect())
+    while True:
+        print(result)
+        choice = input(msg[0])
+
+        if choice == 'y':
+            M = str(result)
+
+        choice = input(msg[1])
+
+        if choice == 'y':
+            result = calculator(data_collect())
+        else:
+            break
+
+
+recall()
