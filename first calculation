@@ -1,0 +1,32 @@
+def calculator(expression):
+    num1, operator, num2 = expression
+    num1, num2 = float(num1), float(num2)
+
+    if operator == '*':
+        return num1 * num2
+    elif operator == '/':
+        return num1 / num2
+    elif operator == '+':
+        return num1 + num2
+    else:
+        return num1 - num2
+
+def inputting():
+    msg = ("Enter an equation", "Do you even know what numbers are? Stay focused!",
+           "Yes ... an interesting math operation. You've slept through all classes, haven't you?",
+           "Yeah... division by zero. Smart move...")
+    while True:
+        print(msg[0])
+        equation = input().split()
+        number_1, operator, number_2 = equation
+        if number_1.isalpha() or number_2.isalpha():
+            print(msg[1])
+        elif operator not in ('+', '-', '*', '/'):
+            print(msg[2])
+        elif operator == '/' and number_2 == '0':
+            print(msg[3])
+        else:
+            print(calculator((number_1, operator, number_2)))
+            break
+
+inputting()
