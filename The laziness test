@@ -1,0 +1,84 @@
+msg = ("Enter an equation", 
+           "Do you even know what numbers are? Stay focused!",
+           "Yes ... an interesting math operation. You've slept through all classes, haven't you?",
+           "Yeah... division by zero. Smart move...",
+           "Do you want to store the result? (y / n):",
+           "Do you want to continue calculations? (y / n):",
+           " ... lazy",
+           " ... very lazy",
+           " ... very, very lazy",
+           "You are")
+
+def main():
+    memory = 0
+    bol = True
+    while bol:
+        expression = input(f'{msg[0]} \n').split()
+        x, oper, y = expression
+
+        if x == 'M':
+            x == memory
+        elif y =='M':
+            y = memory
+
+        try:
+            x, y = float(x), float(y)
+        except ValueError:
+            print(msg[1])
+            return main()
+    
+        if oper not in ('+', '-', '*', '/'):
+            print(msg[2])
+            return main()
+
+        check(x, y, oper)
+
+
+        try:
+            result = calculator(x, y, oper)
+        except ZeroDivisionError:
+            print(msg[3])
+            return main()
+            
+        print(result, msg[4], sep='\n')
+        choice = input()
+   
+        if choice == 'y':
+            memory = result
+    
+        print(msg[5])
+        choice = input()
+
+        if choice == 'n':
+            return
+            
+def check(v1, v2, v3):
+    msg1 = ''
+    if is_one_digit(v1) and is_one_digit(v2):
+        msg1 = msg1 + msg[6]
+    if (v1 == 1 or v2 == 1) and v3 == '*':
+        msg1 = msg1 + msg[7]
+    if (v1 == 0 or v2 == 0) and (v3 == '*' or v3 == '+' or v3 == '-'):
+        msg1 = msg1 + msg[8]
+    if msg1 != '':
+        msg1 = msg[9] + msg1
+        print(msg1)
+
+
+def is_one_digit(v):
+    if v.is_integer():
+        return (v > -10) and (v < 10)
+    else:
+        return False
+
+def calculator(a, b, operator):
+    if operator == '+':
+        return a + b
+    elif operator == '-':
+        return a - b
+    elif operator == '*':
+        return a * b
+    else:
+        return a / b
+
+main()
